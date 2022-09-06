@@ -39,16 +39,16 @@ def main() :
             equation = rData.replace("^", "**")
             print("[Parsed][ " + equation + " ]")
             
-            ansArr = solve(equation)
-            lenArr = len(ansArr)
+            ansArr = solve(equation) # solve에 넣으면 정답이 나옴
+            lenArr = len(ansArr)    # 배열 형태로 리턴해주는데 경우의수를 따지기 위해 len으로 길이 확인
             rst = ""
             
-            if(lenArr == 1) :
+            if(lenArr == 1) : # 중근인데 3중근
                 rst = repr(ansArr[0]) + ", " + repr(ansArr[0]) + ", " + repr(ansArr[0]) + "\n"
                 s.send(rst.encode())
                 print("[Sended] " + rst)
                 
-            elif (lenArr == 2) :
+            elif (lenArr == 2) : # 어느것이 중근인지 검증을 해야함
                 prifix = int(equation.split("*x**3")[0])
                 emt1 = ansArr[0]
                 emt2 = ansArr[1]
@@ -57,7 +57,7 @@ def main() :
                 print(eCase1)
                 print(eCase2)
                 if (eCase1.equals(equation)):
-                    rst = repr(emt1) + ", " + repr(emt1) + ", " + repr(emt2) + "\n"
+                    rst = repr(emt1) + ", " + repr(emt1) + ", " + repr(emt2) + "\n" # repr -> 문자열 변환. solve로 받는 리턴값은 integer라서 문자열로 변환해줘야함.
                     s.send(rst.encode())
                     print("[Sended] " + rst)
                 elif (eCase2.equals(equation)):
@@ -68,7 +68,7 @@ def main() :
                     rst = repr(emt1) + ", " + repr(emt2) + "\n"
                     s.send(rst.encode())
                     print("[Sended] " + rst)
-            elif (lenArr == 3):
+            elif (lenArr == 3): # 이건 그냥 그대로 설정하면 됨
                 rst = repr(ansArr[0]) + ", " + repr(ansArr[1]) + ", " + repr(ansArr[2]) + "\n"
                 s.send(rst.encode())
                 print("[Sended] " + rst)

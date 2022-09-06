@@ -11,6 +11,9 @@ def practice() :
     rData = rData.replace("x", "*x")
     equation = rData.replace("^", "**")
     print(equation)
+    
+    ansArr = solve(equation)
+    print(ansArr)
 
 if __name__ == "__main__":
   practice()                
