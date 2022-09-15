@@ -25,3 +25,14 @@
 - LSB : Least Significant Bit
     - 입력은 순차적으로 해도 컴퓨터에서 거꾸로 읽어서 해석함
     - 64 bit 기 때문에 8 byte씩 뒤집어서 해석
+
+3. 소스파일 분석
+- 기드라 실행
+- ezheap을 넣기 돌리고 Open With > CodeBrowser 실행
+- 제일 먼저 메인 함수 찾기
+    - Symbol Tree에서 main 검색하면 나옴
+- 단서가 될만한 것들을 찾아야함
+    - ctrl + shift + e 로 문자열 검색
+    - 또는 memory search 실행
+> 검색결과 shell을 실행하면 풀리는 문제임
+> 백도어 코드로 유추함
