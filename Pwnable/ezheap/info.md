@@ -36,3 +36,10 @@
     - 또는 memory search 실행
 > 검색결과 shell을 실행하면 풀리는 문제임
 > 백도어 코드로 유추함
+
+4. gdb 실행
+- gdb -q ./ezheap
+- break (브레이크 확인)
+- b *주소값 (브레이크 추가. 주소값을 넣어야함. ex b *0x00400efe)
+- info b (브레이크 현재 걸려있는거 확인)
+- run (실행. permission 오류가 나면 실행파일 chmod 777 주기...?)
