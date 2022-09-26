@@ -2,7 +2,7 @@
 웹 기반 필터링을 우회해서 특정 함수 등의 코드나 외부 프로그램 실행
 exec 변수로 php code injection 공격 수행
 
-## exploit
+# exploit
 1. $filter 배열에 있는걸 그대로 사용해도 됨
 > ?exec=$filter[0](char(108).chr(115)); = system(ls)
 >> php 에서는 문자열 합치는걸 . 를 사용함
