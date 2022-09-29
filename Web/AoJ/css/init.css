@@ -1,0 +1,36 @@
+@import "font.css";
+@import "comp/heading.css";
+@import "comp/layout.css";
+@import "comp/button.css";
+@import "comp/textbox.css";
+@import "comp/court.css";
+
+html {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18pt;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Noto Sans KR Bold';
+    color: #000;
+    letter-spacing: -1px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Serif KR', serif;
+}
+
+*:focus {
+    outline: 0;
+}
+
+.logo {
+    background-image: url('./assets/AOJCI.svg');
+    background-repeat: no-repeat;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 20px;
+}
