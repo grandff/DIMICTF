@@ -94,10 +94,10 @@ def generateRandString(length, table=string.ascii_letters + string.digits): # a-
 def generateEncryptData():
     key1 = generateRandString(5) * 8
     salt = generateRandString(5) * 8
-    offset = random.randrange(0, 5)
+    offset = random.randrange(0, 5) # 0 ~ 4의 임의의 숫자 설정
     flag = os.environ['flag']
-    key2 = ''.join([chr(ord(key1[i]) ^ ord(flag[i])) for i in range(0, 40)])
-    enc_data = ''.join([chr(ord(key2[i]) ^ ord(salt[i])) for i in range(0, 40)])
+    key2 = ''.join([chr(ord(key1[i]) ^ ord(flag[i])) for i in range(0, 40)])    # 0~39까지 반복문 진행. key1과 flag를 xor하고 문자열로 바꿈
+    enc_data = ''.join([chr(ord(key2[i]) ^ ord(salt[i])) for i in range(0, 40)]) # key2를 salt와 xor하고 문자열로 바꿈
     send('salt[%d]=%c' % (offset, salt[offset]))
     send('enc_data=%s' % enc_data)
 
@@ -107,3 +107,20 @@ if __name__ == '__main__':
     send('You can calc flag?')
     generateEncryptData()
 ```
+
+## 풀이전략
+1. 복잡하게 처리는 하고 있으나, 핵심은 xor이 전부임
+2. xor은 아래와 같은 특징을 가짐
+> 97 ^ 50 ^ 50 = 97
+> 97 ^ 50 ^ 50 ^ 50 = 83
+> 97 ^ 50 ^ 50 ^ 50 ^ 50 = 97
+>> 똑같은 값을 두번 xor 하면 상쇄됨
+
+3. 위의 공식을 이용하여 적당한 방정식 설정
+> (1) enc_data[i] = key1[i] ^ flag[i] ^ salt[i] :: enc_data i 번째 요소는 이 식과 동일함
+> (2) enc_data[i] ^ salt[i] = key1[i] ^ flag[i] ^ salt[i] ^ salt[i] :: 양쪽에 salt를 xor 해서 상쇄처리
+> (3) enc_data[i] ^ salt[i] ^ key1[i] = key1[i] ^ flag[i] ^ key1[i] :: 양쪽에 key1를 xor 해서 상쇄처리
+> (4) enc_data[i] ^ salt[i] ^ key1[i] = flag[i] :: 최종공식
+
+4. key1은 예측할 수 없기 때문에 브루트포스로 추측함. 경우의수는 a-zA-Z0-9로 총 62번.
+5. 좌변을 계산했을 때 DIMI{ 로 시작해야함
