@@ -69,3 +69,41 @@
 - 이를 확인하기 위해 HxD로 열어보기
 - 정상적인 pyc 파일하고 비교해보면 처음 시작하는 16진수가 다름.. 나는 처음부터 정상적인 소스로 나왔음
 - 즉, 강의상 오류가 나오는 e.pyc파일은 왼쪽 12바이트가 잘려서 복원해줄 필요가 있음
+
+> uncomplye6 e.pyc > e.py
+>> 이 명령어로 파일을 바로 생성할 수 있음
+
+## e.py 분석
+```python
+# uncompyle6 version 3.8.0
+# Python bytecode 3.5 (3350)
+# Decompiled from: Python 3.8.10 (default, Jun 22 2022, 20:18:18) 
+# [GCC 9.4.0]
+# Embedded file name: e.py
+import sys, random, string, os, time
+
+def send(data, end='\n'):
+    sys.stdout.write(data + end)
+    sys.stdout.flush()
+
+
+def generateRandString(length, table=string.ascii_letters + string.digits): # a-Z0-9 까지 table 설정
+    return ''.join([random.choice(table) for _ in range(length)])   # length 만큼 랜덤한 table 범위 값을 붙여서 생성
+
+
+def generateEncryptData():
+    key1 = generateRandString(5) * 8
+    salt = generateRandString(5) * 8
+    offset = random.randrange(0, 5)
+    flag = os.environ['flag']
+    key2 = ''.join([chr(ord(key1[i]) ^ ord(flag[i])) for i in range(0, 40)])
+    enc_data = ''.join([chr(ord(key2[i]) ^ ord(salt[i])) for i in range(0, 40)])
+    send('salt[%d]=%c' % (offset, salt[offset]))
+    send('enc_data=%s' % enc_data)
+
+
+if __name__ == '__main__':
+    random.seed(int(time.time()))   # 랜덤값 생성을 위한 seed 호출. int(time.time())은 1초내에 호출되는 값에 한해서 동일한 값이 나옴. int가 소숫점을 잘라버려서...
+    send('You can calc flag?')
+    generateEncryptData()
+```
