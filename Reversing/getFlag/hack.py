@@ -46,7 +46,7 @@ def main() :
         key1 = 0
         key2 = ord(encVal[saltIdx]) ^ ord(saltVal)
         for i in range(0, len(table)) :
-            if (key2 ^ ord(table[i]) == prifix[saltIdx]) :
+            if (key2 ^ ord(table[i]) == prifix[saltIdx]) :  # key1을 구하기 위해 테이블에 있는 모든 문자 대입해서 확인
                 key1 = ord(table[i])
                 break
             
