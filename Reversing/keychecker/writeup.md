@@ -74,12 +74,12 @@
     sVar1 = strlen(pcParm1);
     pvVar2 = malloc((long)((int)sVar1 * 9));
     local_28 = 0;
-    while (local_28 < (int)sVar1) {
+    while (local_28 < (int)sVar1) { // local_28을 하나씩 증가시키면서 반복문 진행
         pcParm1[(long)local_28] = pcParm1[(long)local_28] ^ 0x23;
-        local_24 = (int)pcParm1[(long)local_28];
+        local_24 = (int)pcParm1[(long)local_28];    // 한 단어씩 가져와서
         local_2c = 0;
         while (local_2c < 8) {
-        *(char *)((long)pvVar2 + (long)(local_28 * 8 + local_2c)) = (char)(local_24 % 2) + '0';
+        *(char *)((long)pvVar2 + (long)(local_28 * 8 + local_2c)) = (char)(local_24 % 2) + '0'; // 2진수 변환
         local_24 = local_24 / 2;
         local_2c = local_2c + 1;
         }
