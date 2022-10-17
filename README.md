@@ -4,4 +4,17 @@
 
 
 ## todo list
-[ ] 
+### MISC
+[ ] dimi-contract
+[ ] ctfind
+
+### Pwnable
+[ ] ezheap
+[ ] ezshellcode
+[ ] ropsaurusrex2
+[ ] dimi-farm
+[ ] dimi-login
+
+### Reversing
+[ ] linked_reverse
+[ ] gorev
